@@ -52,6 +52,15 @@
     "removes_effects": [ "parasitized" ]
   },
   {
+    "type": "effect_type",
+    "id": "orgasm",
+    "rating": "good",
+    "name": [ "Оргазм" ],
+    "desc": [ "Кульминация сексуального наслаждения." ],
+    "apply_message": "Вы занимаетесь сексом c трупом.",
+    "base_mods": { "int_mod": [ -1 ], "per_mod": [ -1 ] }
+  },
+  {
     "id": "genital_bait",
     "type": "TOOL",
     "name": "приманка для паразитов",
@@ -85,13 +94,9 @@
     "copy_from": "corpse",
     "use_action": {
         "type": "consume_drug",
-        "activation_message": "Вы испытали оргазм от секса с %s.",
+        "activation_message": "Вы испытываете оргазм от секса с %s.",
         "move_cost": 5000,
         "effects": [
-            {
-                "id": "high",
-                "duration": 5
-            },
             {
                 "id": "parasitized",
                 "duration": 1249
@@ -99,6 +104,10 @@
             {
                 "id": "parasitized",
                 "duration": 1
+            },
+            {
+                "id": "orgasm",
+                "duration": 4
             }
         ]
     }
