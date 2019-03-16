@@ -2,7 +2,7 @@
 Модификация для "Cataclysm: Dark Days Ahead", позволяющая разнообразить личную жизнь в постапокалиптическом мире.
 
 ## Установка
-Поместите [папку с модом](https://github.com/pahom/dda-necro/archive/master.zip) в `data/mods/` и отредактируйте файл `save/{ваш_мир}/mods.json` добавив туда строчку `"necrophilia"`.
+Поместите папку с название [Necrophilia](https://github.com/pahom/dda-necro/archive/master.zip) в `data/mods/` и отредактируйте файл `save/{ваш_мир}/mods.json` добавив туда строчку `"necrophilia"`.
 
 ## Использование
 1. Возьмите в руки  или поднимите в инвентарь какой-нибудь труп.
