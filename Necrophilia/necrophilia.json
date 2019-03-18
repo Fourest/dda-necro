@@ -32,8 +32,8 @@
     "apply_message": "Вы ощущаете множественные инородные тела в ваших гениталиях.",
     "remove_message": "Вы ощущаете как паразиты выползают из ваших гениталии.",
     "max_intensity": 7,
-    "max_duration": 1500,
-    "int_dur_factor": 250,
+    "max_duration": 3000,
+    "int_dur_factor": 500,
     "miss_messages": [
         ["Паразиты беспокоят ваши гениталии.", 1],
         ["Паразиты грызут ваши гениталии изнутри.", 2]
@@ -47,24 +47,80 @@
   },
   {
     "type": "effect_type",
+    "id": "orgasm",
+    "rating": "good",
+    "name": [ "Оргазм" ],
+    "desc": [ "Кульминация сексуального наслаждения." ],
+    "decay_messages": [
+        ["Вы в экстазе от оргазма сливаетесь с трупом в одно целое.", "good"],
+        ["Ваш темп нарастает все быстрее.", "good"],
+        ["Вы основательно перепачкали гениталии в кусочках плоти от трупа.", "bad"]
+    ],
+    "apply_message": "Вы нежно целуете труп и соприкасаетесь гениталиями с ним.",
+    "max_intensity": 4,
+    "max_duration": 30,
+    "int_dur_factor": 10
+  },
+  {
+    "id": "corpse",
+    "type": "GENERIC",
+    "name": "corpse",
+    "symbol": "%",
+    "description": "A dead body.",
+    "copy_from": "corpse",
+    "revert_to": "corpse",
+    "use_action": {
+        "type": "transform",
+        "target": "corpse_use",
+        "active": true,
+        "msg": "Вы начали заниматься сексом c %s.",
+        "menu_text": "Заняться сексом",
+        "moves": 5000
+    }
+  },
+  {
+    "id": "corpse_use",
+    "type": "TOOL",
+    "name": "corpse",
+    "symbol": "%",
+    "description": "A dead body.",
+    "copy_from": "corpse",
+    "max_charges": 1,
+    "initial_charges": 1,
+    "turns_per_charge": 1,
+    "ammo": "NULL",
+    "revert_to": "corpse",
+    "use_action": {
+        "type": "consume_drug",
+        "activation_message": "<color_light_cyan>(звуки секса)</color>",
+        "moves" : 1,
+        "effects": [
+            {
+                "id": "orgasm",
+                "duration": 30
+            },
+            {
+                "id": "parasitized",
+                "duration": 2499
+            },
+            {
+                "id": "parasitized",
+                "duration": 1
+            }
+        ]
+    }
+  },
+  {
+    "type": "effect_type",
     "id": "parasitized_heal",
     "rating": "good",
     "removes_effects": [ "parasitized" ]
   },
   {
-    "type": "effect_type",
-    "id": "orgasm",
-    "rating": "good",
-    "name": [ "Оргазм" ],
-    "desc": [ "Кульминация сексуального наслаждения." ],
-    "apply_message": "Вы занимаетесь сексом c трупом.",
-    "base_mods": { "int_mod": [ -1 ], "per_mod": [ -1 ] }
-  },
-  {
-    "id": "genital_bait",
+    "id": "meat_wormbait",
     "type": "TOOL",
     "name": "приманка для паразитов",
-    "description": "Это приманка из куска плоти пропитанного мочевиной. Паразиты обитающие в гениталях обожают это сочетание и с удовольсвтием переползут в нее.",
+    "description": "Это кусок плоти хорошенько пропитанный мочевиной. Паразиты обитающие в гениталях обожают это ароматное сочетание и с удовольсвием переползут на него.",
     "weight": 200,
     "volume": 2,
     "price": 100,
@@ -76,7 +132,7 @@
     "use_action": {
         "type": "consume_drug",
         "activation_message": "Вы приложили приманку для паразитов к гениталиям.",
-        "move_cost": 500,
+        "moves": 1000,
         "effects": [ 
             {
                 "id": "parasitized_heal",
@@ -86,38 +142,12 @@
     }
   },
   {
-    "id": "corpse",
-    "type": "GENERIC",
-    "name": "corpse",
-    "symbol": "%",
-    "description": "A dead body.",
-    "copy_from": "corpse",
-    "use_action": {
-        "type": "consume_drug",
-        "activation_message": "Вы испытываете оргазм от секса с %s.",
-        "move_cost": 5000,
-        "effects": [
-            {
-                "id": "parasitized",
-                "duration": 1249
-            },
-            {
-                "id": "parasitized",
-                "duration": 1
-            },
-            {
-                "id": "orgasm",
-                "duration": 1
-            }
-        ]
-    }
-  },
-  {
-    "result": "genital_bait",
+    "result": "meat_wormbait",
     "type": "recipe",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TRAPS",
-    "time": 1000,
+    "time": 5000,
+    "skill_used": "firstaid",
     "autolearn": true,
     "flags": [ "BLIND_EASY" ],
     "components": [ [ ["meat", 1], ["meat_tainted", 1], ["human_flesh", 1] ] ]
